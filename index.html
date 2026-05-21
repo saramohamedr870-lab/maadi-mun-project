@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Maadi MUN Project</title>
+    <style>
+      body {
+        font-family: Arial;
+        background-color: #f0f4f8;
+        padding: 30px;
+      }
+
+      section {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+      }
+
+      h1,
+      h2 {
+        color: darkblue;
+      }
+
+      input {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px;
+        width: 200px;
+      }
+
+      button {
+        background-color: darkblue;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      p {
+        font-weight: bold;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>password checker</h1>
+      <label>password check</label>
+      <input type="password" id="pass" placeholder="Enter a password" />
+      <button class="check">check</button>
+      <p class="result1"></p>
+    </section>
+    <section>
+      <h2>Weight Calculator</h2>
+      <label>height</label>
+      <input type="number" id="height" placeholder="enter height" />
+      <label>weight</label>
+      <input type="number" id="weight" placeholder="enter weight" />
+      <button class="calweight">Calculate</button>
+      <p class="result2"></p>
+    </section>
+    <script>
+      let userpass = document.getElementById("pass");
+      let result1 = document.querySelector(".result1");
+      let button_check = document.querySelector(".check");
+      button_check.onclick = function () {
+        let passvalue = userpass.value;
+        console.log(passvalue);
+        let score = 0;
+        if (passvalue.length < 6) {
+          score += 1;
+        } else if (passvalue.length >= 6 && passvalue.length <= 10) {
+          score += 2;
+        } else {
+          score += 3;
+        }
+        let contdigit = false;
+        let contcap = false;
+        for (let i = 0; i < passvalue.length; i++) {
+          let char = passvalue[i];
+          if (char >= "0" && char <= "9") {
+            contdigit = true;
+          }
+          if (char === char.toUpperCase() && isNaN(char)) {
+            contcap = true;
+          }
+        }
+        if (contdigit == true) {
+          score += 1;
+        }
+        if (contcap == true) {
+          score += 1;
+        }
+        if (score < 4) {
+          result1.innerHTML = "weak password";
+        } else if (score == 4) {
+          result1.innerHTML = "medium password";
+        } else {
+          result1.innerHTML = "strong password";
+        }
+      };
+      let height = document.getElementById("height");
+      let weight = document.getElementById("weight");
+      let calculate = document.querySelector(".calweight");
+      let result2 = document.querySelector(".result2");
+      calculate.onclick = function () {
+        let height1 = height.value;
+        let weight1 = weight.value;
+        let heightm = height1 / 100;
+        let BMI = weight1 / (heightm * heightm);
+        result2.innerHTML = BMI;
+      };
+    </script>
+  </body>
+</html>
